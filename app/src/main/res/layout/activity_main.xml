@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/lay1"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:id="@+id/appLogo"
+            android:src="@drawable/safe"
+            android:layout_height="100dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Lets Farm"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:id="@+id/AppName"
+            android:textColor="@color/white"
+            android:padding="20dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+<!--    <com.agrawalsuneet.dotsloader.loaders.LazyLoader-->
+<!--        android:layout_above="@id/version"-->
+<!--        android:id="@+id/loader"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        app:lazyloader_animDur="800"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        app:lazyloader_dotsDist="10dp"-->
+<!--        app:lazyloader_dotsRadius="16dp"-->
+<!--        app:lazyloader_firstDelayDur="150"-->
+<!--        app:lazyloader_firstDotColor="@color/white"-->
+<!--        app:lazyloader_interpolator="@android:anim/decelerate_interpolator"-->
+<!--        app:lazyloader_secondDelayDur="300"-->
+<!--        app:lazyloader_secondDotColor="@color/white"-->
+<!--        app:lazyloader_thirdDotColor="@color/white" />-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="Version 1.0"
+        android:id="@+id/version"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

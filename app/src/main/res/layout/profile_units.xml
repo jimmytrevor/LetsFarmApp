@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Additional App Services"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <GridLayout
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/opeShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_share_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="Share App"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Don't Enjoy Alone. Share with Freinds"/>
+
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_bug_report_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="Report Bug"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Report Error For App Improvement"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+
+
+
+        <GridLayout
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_star_border_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="Rate &amp; Review"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Order Items And Taken To Your Destination"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_more_vert_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="More About"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Navigate to How You Have Used Application"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </GridLayout>
+
+        <GridLayout
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_settings_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="Settings"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Customize Application For Better Use"/>
+
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:padding="10dp"
+                android:id="@+id/openSuggets"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="5dp"
+                card_view:contentPadding="10dp"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:src="@drawable/ic_open_in_new_black_24dp"
+                        android:layout_height="60dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:padding="7dp"
+                        android:text="Suggest Feature"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_columnWeight="1"
+                        android:padding="8dp"
+                        android:text="Help Us Your Implement Features"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

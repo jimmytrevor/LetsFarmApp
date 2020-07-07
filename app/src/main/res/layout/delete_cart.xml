@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:fontFamily="monospace"
+        android:text="Are you sure you want to delete this item from the order cart."
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_delete_sweep_black_24dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/appImage"
+        />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/closeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:fontFamily="monospace"
+            android:background="@drawable/edittext_border_shape"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/colorPrimary"
+            android:padding="10dp"
+            android:text="No, Keep"
+            />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/deleteCart"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:fontFamily="monospace"
+            android:background="@drawable/borderless"
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

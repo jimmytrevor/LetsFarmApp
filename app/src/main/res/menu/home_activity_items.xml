@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" >
+        <item android:title="Settings"
+            android:id="@+id/help"
+            app:showAsAction="never"
+            android:iconTint="@color/white"
+            />
+        <item android:title="Rate App"
+            android:id="@+id/share"
+            android:iconTint="@color/white"
+            app:showAsAction="never"
+            />
+        <item android:title="About Us"
+            android:id="@+id/about"
+            app:showAsAction="never"
+            android:iconTint="@color/white"
+            />
+        <item android:title="Privacy"
+            android:iconTint="@color/white"
+            android:id="@+id/privacy"
+            app:showAsAction="never"
+            />
+    </group>
+    <item
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        android:iconTint="@color/white"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView" />
+
+</menu>

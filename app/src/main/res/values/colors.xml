@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3898E7</color>
+    <color name="colorPrimaryDark">#3898E7</color>
+    <color name="colorAccent">#3898E7</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#3F51B5</color>
+    <color name="black">#000000</color>
+    <color name="color_test">#EEE2E0E0</color>
+
+    <!-- Material Design Color - Color palette -->
+    <color name="red_primary">#F44336</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen4">#9FA39F</color>
+    <color name="dot_dark_screen2">#9FA39F</color>
+    <color name="dot_dark_screen1">#9FA39F</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen3">#9FA39F</color>
+    <color name="dot_light_screen5">#9FA39F</color>
+    <color name="colorgrey">#9FA39F</color>
+
+
+    <array name="array_dot_active">
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimary</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen4</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen1</item>
+    </array>
+</resources>

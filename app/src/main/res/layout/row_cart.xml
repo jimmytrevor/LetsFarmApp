@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardCornerRadius="5dp"
+        card_view:contentPadding="1dp">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/pImage"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="88dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_hint"
+                    android:layout_height="88dp"/>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:layout_margin="3dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/cName"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:padding="3dp"
+                            android:textStyle="bold"
+                            android:text="SSEGUJJA JIMMY"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/closeThis"
+                            android:layout_weight="5"
+                            android:textAllCaps="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/borderless"
+                            android:textAlignment="center"
+                            android:textColor="@color/red_primary"
+                            android:text="X"
+                            android:padding="3dp"
+                            android:textStyle="bold"
+                            android:gravity="start" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_weight="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:padding="1dp"
+                            android:text="UGX:"
+                            android:fontFamily="serif-monospace"
+                            android:gravity="end" />
+                        <TextView
+                            android:id="@+id/cAmount"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:padding="1dp"
+                            android:text=""
+                            android:fontFamily="serif-monospace"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/holo_orange_dark"
+                            android:gravity="start" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/black"
+                        android:layout_height="0dp"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="start"
+                            android:text=""
+                            android:padding="0dp"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorPrimary" />
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                            android:id="@+id/elegant"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            card_view:textColor="@android:color/holo_orange_dark"
+                            android:backgroundTint="@color/white"
+                            card_view:backGroundColor="@color/white"
+                            card_view:finalNumber="10000"
+                            card_view:initialNumber="1"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
