@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/colorgrey"
-    tools:context=".HistoryFragment">
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:text="My Orders. See Orders Made"
-        android:layout_alignParentTop="true"
+        android:text="Products in The Order"
         android:padding="10dp"
         android:drawablePadding="20dp"
         android:fontFamily="serif-monospace"
         android:textSize="18sp"
+        android:drawableRight="@drawable/ic_add_shopping_cart_black_24dp"
         android:id="@+id/text"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/search_input"
-        android:layout_below="@+id/text"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:hint="Search Order"
-        android:drawablePadding="10dp"
-        android:drawableTint="@android:color/holo_orange_dark"
-        android:drawableLeft="@drawable/ic_search_black_24dp"
-        android:background="@drawable/search_design"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"/>
-
     <LinearLayout
-        android:id="@+id/dataLay"
-        android:layout_below="@+id/search_input"
+        android:layout_below="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"
         android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_below="@+id/text"
+            android:inputType="text"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:hint="Quick Item Search"
+            android:drawablePadding="10dp"
+            android:drawableTint="@android:color/holo_orange_dark"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:background="@drawable/search_design"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tipsRecycle"
@@ -56,23 +54,11 @@
                 android:layout_gravity="center" />
             <TextView
                 android:textAlignment="center"
-                android:text="Fetching Orders...."
+                android:text="Fetching Order Details...."
                 android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/emptyLay"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/no_order"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

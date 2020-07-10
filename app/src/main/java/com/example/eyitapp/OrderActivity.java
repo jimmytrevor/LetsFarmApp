@@ -1,32 +1,24 @@
 package com.example.eyitapp;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
+import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,75 +28,58 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.eyitapp.HttpLinks.returnOrder;
+import static com.example.eyitapp.HttpLinks.customOrder;
+import static com.example.eyitapp.HttpLinks.saveOrder;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HistoryFragment extends Fragment {
-
-    String finalResult ;
-    HashMap<String,String> hashMap = new HashMap<>();
+public class OrderActivity extends AppCompatActivity {
+    Toolbar tool;
+    private TextView dateMade,totalProduct,totalPrice,orderStatus,orderID,subPrice,dollars;
+    RecyclerView recyclerView;
+    LinearLayout progress,empty,finished;
     String ParseResult ;
-    String urlReturn=returnOrder;
+    ProgressDialog progressDialog;
+    String getCustome=customOrder;
+    HttpParse httpParse = new HttpParse();
+    String finalResult;
     HashMap<String,String> ResultHash = new HashMap<>();
     String FinalJSonObject ;
-    String TempItem;
-    String name;
-    HttpParse httpParse = new HttpParse();
-    ProgressDialog pDialog;
-    ProgressDialog progressDialog2;
-    String userPhoneHolder;
-    TextView test;
-    List<History_Objects> List;
-
-
-    RecyclerView recyclerView;
-    LinearLayout progress,noOrder,dataLay;
-    private  Context context;
-
-    History_Adapter adapter;
+    String orderIDHolder;
+    java.util.List<Single_Object> List;
+    Single_Adapter adapter;
     EditText search_input;
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
-        recyclerView =view.findViewById(R.id.tipsRecycle);
-        progress=view.findViewById(R.id.progressLay);
-        dataLay=view.findViewById(R.id.dataLay);
-        test=view.findViewById(R.id.text);
-        search_input=view.findViewById(R.id.search_input);
-        noOrder=view.findViewById(R.id.emptyLay);
-        recyclerView.setHasFixedSize(true);
-        noOrder.setVisibility(View.GONE);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order);
+        tool=findViewById(R.id.toolbar);
+        dateMade = findViewById(R.id.dateMade);
+        orderID = findViewById(R.id.orderID);
+        subPrice=findViewById(R.id.sub_price);
+        totalProduct = findViewById(R.id.orderProducts);
+        totalPrice = findViewById(R.id.orderPrice);
+        orderStatus = findViewById(R.id.orderStatus);
+        dollars =findViewById(R.id.dollars);
+       search_input=findViewById(R.id.search_input);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
-
+        recyclerView =findViewById(R.id.tipsRecycle);
+        progress=findViewById(R.id.progressLay);
+        recyclerView.setLayoutManager(new LinearLayoutManager(OrderActivity.this));
+//        get extras
+        dateMade.setText(""+getIntent().getStringExtra("DATE"));
+        orderID.setText(""+getIntent().getStringExtra("ID"));
+        subPrice.setText("UGX "+getIntent().getStringExtra("PRICE"));
+        totalPrice.setText("UGX "+getIntent().getStringExtra("PRICE"));
+        orderStatus.setText(""+getIntent().getStringExtra("STATUS"));
+        totalProduct.setText(""+getIntent().getStringExtra("PRODUCTS"));
+        dollars.setText("$ "+getIntent().getStringExtra("DOLLARS"));
         List = new ArrayList<>();
+        tool.setTitle("Order : " +getIntent().getStringExtra("ID"));
+        setSupportActionBar(tool);
+        fadeIn(tool);
 
-//        proceed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getContext(),HomeActivity.class));
-//                Toast.makeText(getContext(), "Feed Your Cart Now", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-        noOrder.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_in_transition));
-//        test.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
-       adapter = new History_Adapter(getContext(), List);
-        userPhoneHolder= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-        HttpWebCall(userPhoneHolder);
+        adapter = new Single_Adapter(this, List);
+        orderIDHolder=""+getIntent().getStringExtra("ID");
+        HttpWebCall(orderIDHolder);
 
         search_input.setImeOptions(EditorInfo.IME_ACTION_DONE);
         search_input.addTextChangedListener(new TextWatcher() {
@@ -125,11 +100,19 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-        return view;
     }
 
-    //Method to show current record Current Selected Record
-    public void HttpWebCall(String phone){
+    private void fadeIn(View view){
+        AlphaAnimation animation=new AlphaAnimation(0.0f,1.0f);
+        animation.setDuration(1500);
+        view.startAnimation(animation);
+        view.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+    public void HttpWebCall(String orderID){
 
         class HttpWebCallFunction extends AsyncTask<String,Void,String> {
 
@@ -151,16 +134,16 @@ public class HistoryFragment extends Fragment {
                 FinalJSonObject = httpResponseMsg ;
 
                 //Parsing the Stored JSOn String to GetHttpResponse Method.
-                new HistoryFragment.GetHttpResponse(getActivity()).execute();
+                new OrderActivity.GetHttpResponse(OrderActivity.this).execute();
 
             }
 
             @Override
             protected String doInBackground(String... params) {
 
-                ResultHash.put("userPhone",params[0]);
+                ResultHash.put("Order_ID",params[0]);
 
-                ParseResult = httpParse.postRequest(ResultHash, urlReturn);
+                ParseResult = httpParse.postRequest(ResultHash, getCustome);
 
                 return ParseResult;
             }
@@ -168,8 +151,9 @@ public class HistoryFragment extends Fragment {
 
         HttpWebCallFunction httpWebCallFunction = new HttpWebCallFunction();
 
-        httpWebCallFunction.execute(userPhoneHolder);
+        httpWebCallFunction.execute(orderIDHolder);
     }
+
 
     private class GetHttpResponse extends AsyncTask<Void, Void, Void>
     {
@@ -204,21 +188,15 @@ public class HistoryFragment extends Fragment {
                         for(int i=0; i<jsonArray.length(); i++)
                         {
                             jsonObject = jsonArray.getJSONObject(i);
-                            name= jsonObject.getString("Price").toString();
-                            List.add(new History_Objects(
-                                    jsonObject.getInt("ID"),
-                                    jsonObject.getInt("Price"),
-                                    jsonObject.getInt("TotalProducts"),
-                                    jsonObject.getInt("Order_status_ID"),
-                                    jsonObject.getString("Customer_ID"),
-                                    jsonObject.getString("DateMade")
+
+                            List.add(new Single_Object(
+                                    jsonObject.getInt("Product_ID"),
+                                    jsonObject.getInt("Quantity"),
+                                    jsonObject.getInt("Single_Price"),
+                                    jsonObject.getString("Name")
                             ));
 
                         }
-
-
-
-
                     }
                     catch (JSONException e) {
                         // TODO Auto-generated catch block
@@ -237,17 +215,16 @@ public class HistoryFragment extends Fragment {
         @Override
         protected void onPostExecute(Void result)
         {
-
+//            Toast.makeText(context, "Empty: "+List.get(1).getName(), Toast.LENGTH_SHORT).show();
             if (List.size() <= 0){
                 progress.setVisibility(View.GONE);
-                dataLay.setVisibility(View.GONE);
-                noOrder.setVisibility(View.VISIBLE);
-                test.setVisibility(View.GONE);
+//                dataLay.setVisibility(View.GONE);
+//                noOrder.setVisibility(View.VISIBLE);
+//                test.setVisibility(View.GONE);
+                Toast.makeText(context, "Empty: "+List.get(1).getName(), Toast.LENGTH_SHORT).show();
 
             }
             else{
-
-
                 recyclerView.setAdapter(adapter);
                 progress.setVisibility(View.GONE);
             }
@@ -255,5 +232,8 @@ public class HistoryFragment extends Fragment {
 
         }
     }
+
+
+
 
 }

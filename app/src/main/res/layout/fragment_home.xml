@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorgrey"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
     <TextView
@@ -16,8 +17,22 @@
         android:drawableRight="@drawable/ic_add_shopping_cart_black_24dp"
         android:id="@+id/text"
         android:layout_height="wrap_content"/>
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/search_input"
         android:layout_below="@+id/text"
+        android:inputType="text"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:hint="Search For Item"
+        android:drawablePadding="10dp"
+        android:drawableTint="@android:color/holo_orange_dark"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:background="@drawable/search_design"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+    <LinearLayout
+        android:layout_below="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"

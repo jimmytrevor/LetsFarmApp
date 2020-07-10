@@ -22,7 +22,7 @@ public class TestActivity extends AppCompatActivity {
     ProgressDialog pDialog;
 
     // Http Url For Filter Student Data from Id Sent from previous activity.
-    String HttpURL = "http://192.168.137.1:8080/Mobile/return.php";
+    String HttpURL = "http://192.168.11.126:8080/Mobile/return.php";
 
     // Http URL for delete Already Open Student Record.
     String finalResult ;

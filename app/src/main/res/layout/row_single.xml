@@ -9,33 +9,32 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="5dp"
-        android:id="@+id/smartContainer"
         android:padding="5dp"
+        android:id="@+id/smartContainer"
         card_view:cardBackgroundColor="#ffffff"
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="1dp">
         <LinearLayout
+
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="105dp"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
-
                 <ImageView
-                    android:id="@+id/pImage"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="88dp"
+                    android:id="@+id/singleImage"
+                    android:layout_width="90dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/image_hint"
-                    android:layout_height="88dp"/>
+                    android:src="@drawable/ic_pin"
+                    android:layout_height="90dp"/>
                 <LinearLayout
+
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:layout_margin="3dp"
@@ -46,9 +45,8 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                         <TextView
-                            android:id="@+id/cName"
+                                android:id="@+id/SingleName"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -58,18 +56,8 @@
                             android:text="SSEGUJJA JIMMY"
                             android:gravity="start" />
 
-                        <ImageButton
-                            android:id="@+id/closeThis"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:layout_gravity="center"
-                            android:tint="@color/red_primary"
-                            android:background="@drawable/borderless2"
-                            android:src="@drawable/ic_remove_black_24dp"
-                            />
-
                     </LinearLayout>
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -78,19 +66,19 @@
                             android:layout_weight="3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:padding="1dp"
                             android:text="UGX:"
                             android:fontFamily="serif-monospace"
                             android:gravity="end" />
                         <TextView
-                            android:id="@+id/cAmount"
+                            android:id="@+id/SinglePrice"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="textStart"
                             android:padding="1dp"
-                            android:text=""
+                            android:text="899898"
                             android:fontFamily="serif-monospace"
                             android:textSize="15sp"
                             android:textStyle="bold"
@@ -99,40 +87,46 @@
                     </LinearLayout>
                     <View
                         android:layout_marginTop="3dp"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="3dp"
                         android:layout_width="match_parent"
-                        android:background="@android:color/black"
-                        android:layout_height="0dp"/>
+                        android:background="@android:color/white"
+                        android:layout_height="1dp"/>
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                         <TextView
-                            android:id="@+id/category"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="6"
-                            android:fontFamily="sans-serif-medium"
-                            android:gravity="start"
-                            android:text=""
-                            android:padding="0dp"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/colorPrimary" />
-                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                            android:id="@+id/elegant"
-                            android:padding="10dp"
-                            android:layout_margin="10dp"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            card_view:textColor="@android:color/holo_orange_dark"
-                            android:backgroundTint="@color/white"
-                            card_view:backGroundColor="@color/white"
-                            card_view:finalNumber="10000"
-                            card_view:initialNumber="1"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:padding="1dp"
+                            android:text="Quantity"
+                            android:id="@+id/category"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="start" />
+                        <TextView
+                            android:layout_weight="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:padding="1dp"
+                            android:text="4"
+                            android:id="@+id/singleQuantity"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/colorPrimary"
+                            android:gravity="start" />
+                        <ImageButton
+                            android:visibility="gone"
+                            android:id="@+id/removeSpot"
+                            android:layout_weight="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:tint="@color/colorPrimary"
+                            android:background="@drawable/borderless2"
+                            android:src="@drawable/ic_remove_black_24dp"
                             />
                     </LinearLayout>
                 </LinearLayout>

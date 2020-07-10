@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -40,6 +44,8 @@ public class HomeFragment extends Fragment {
     String URL_TIPS=getProducts;
     LinearLayout progress;
     private  Context context;
+    private EditText search_input;
+    Home_Adapter adapter;
 
 
     public HomeFragment() {
@@ -56,7 +62,28 @@ public class HomeFragment extends Fragment {
         progress=view.findViewById(R.id.progressLay);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        search_input=view.findViewById(R.id.search_input);
+
         List = new ArrayList<>();
+        adapter = new Home_Adapter(getActivity(), List);
+        search_input.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        search_input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         loadObjects();
         return view;
     }
@@ -94,7 +121,7 @@ public class HomeFragment extends Fragment {
                                 ));
                             }
                             //creating adapter object and setting it to recyclerview
-                            Home_Adapter adapter = new Home_Adapter(getActivity(), List);
+
                             recyclerView.setAdapter(adapter);
                             progress.setVisibility(View.GONE);
                         } catch (JSONException e) {

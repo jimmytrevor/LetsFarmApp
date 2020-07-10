@@ -8,9 +8,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,46 +26,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder> {
-    public String pricex;
-    int total=0,price=0;
+public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder> implements Filterable {
     private Context mContext;
-    private ArrayList<String> proName;
-    private ArrayList<String> proImage;
-    private ArrayList<Integer> proPrice;
-    private ArrayList<Integer> proID;
-    private ArrayList<Integer> proQuantity;
-    private ArrayList<Cart_Objects> cart_objects;
-    private Activity activity;
-    private Cart_Adapter adapter;
-    private static final int MY_CONST = 100;
-    private DatabaseReference reference;
     private ArrayList<String> keys;
-    NestedScrollView nestedView;
-    private  String numberString;
-    BottomSheetBehavior behavior;
-    private TextView spdts;
-    private ImageButton process;
+     List<Cart_Objects> mData;
+    List<Cart_Objects> mDataFiltered;
 
-    public Cart_Adapter(ImageButton process, TextView spdt, Context mContext, Cart_Adapter adapter1, ArrayList<String> proName, ArrayList<String> proImagex, ArrayList<Integer> proPrice, ArrayList<Integer> proID, ArrayList<Integer> proQuantity, Activity activity, DatabaseReference reference, ArrayList<String> keys) {
+
+    public Cart_Adapter(Context mContext, List<Cart_Objects> mData,ArrayList<String> keys) {
         this.mContext = mContext;
-        this.spdts= spdt;
-        this.process =process;
-        this.proName = proName;
-        this.proPrice = proPrice;
-        this.proID = proID;
-        this.adapter=adapter1;
-        this.proImage=proImagex;
-        this.proQuantity = proQuantity;
-        this.activity = activity;
-        this.reference = reference;
-        this.keys = keys;
+        this.mData = mData;
+        this.mDataFiltered = mData;
+        this.keys=keys;
     }
 
 
@@ -75,43 +59,35 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        spdts.setText(""+proPrice.size());
+//        spdts.setText(""+proPrice.size());
+final int intial_price=mDataFiltered.get(position).getPrice();
 
-        Glide.with(activity)
-                .load(proImage.get(position))
+        Glide.with(mContext)
+                .load(mDataFiltered.get(position).getImage())
                 .into(holder.PImage);
-        holder.PName.setText(proName.get(position));
-        holder.Price.setText(String.valueOf(proPrice.get(position)));
-        pricex=holder.Price.getText().toString();
-        final int p=    proPrice.set(position,Integer.parseInt(holder.Price.getText().toString()));
+
+        holder.PImage.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in_transition));
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in_transition));
+        holder.PName.setText(""+mDataFiltered.get(position).getQuantity()+" "+mDataFiltered.get(position).getName());
+        holder.Price.setText(""+mDataFiltered.get(position).getPrice());
+
         holder.numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                int price=(newValue*proPrice.get(position));
+                int price=(newValue*intial_price);
                 holder.Price.setText(String.valueOf(price));
-
-                Toast.makeText(mContext, ""+p, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        /* int pricex= Integer.parseInt(holder.numberButton.getNumber())*proPrice.get(position); */
-
-
-        process.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialog progressDialog=new ProgressDialog(mContext);
-                progressDialog.setMessage("Order Processing......");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                mDataFiltered.get(position).setPrice(price);
+                mDataFiltered.get(position).setQuantity(newValue);
+                holder.PName.setText(""+mDataFiltered.get(position).getQuantity()+" "+mDataFiltered.get(position).getName());
 
             }
         });
+
 
         holder.closeThis.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                LayoutInflater inflater=LayoutInflater.from(activity);
+                LayoutInflater inflater=LayoutInflater.from(mContext);
                 View view=inflater.inflate(R.layout.delete_cart,null);
 
                 Button close=view.findViewById(R.id.closeBtn);
@@ -133,12 +109,13 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder
                     @Override
                     public void onClick(View v) {
 
+
                         String userPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
                         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Cart").child(userPhone).child("yoCart");
                         reference.child(keys.get(position)).removeValue();
-                        Toast.makeText(activity, ""+proName.get(position)+" removed from Cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, ""+mDataFiltered.get(position).getName()+" removed from Cart", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        mContext.startActivity(new Intent(activity.getApplicationContext(),HomeActivity.class).putExtra("Tag","Cart"));
+                        mContext.startActivity(new Intent(mContext.getApplicationContext(),HomeActivity.class).putExtra("Tag","Cart"));
 
                     }
                 });
@@ -148,13 +125,54 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return proImage.size();
+        return mDataFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return myFilterData;
     }
 
 
+    private Filter myFilterData = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String key=constraint.toString();
+            if (key.isEmpty()){
+                mDataFiltered=mData;
+            }
+            else{
+                List<Cart_Objects> FilteredList=new ArrayList<>();
+                for (Cart_Objects row: mData){
+                    if (row.getName().toString().contains(key)  || row.getName().toLowerCase().contains(key) || row.getName().toUpperCase().contains(key)){
+                        FilteredList.add(row);
+                    }
+                }
+
+                mDataFiltered=FilteredList;
+            }
+            FilterResults  filterResults=new FilterResults();
+            filterResults.values=mDataFiltered;
+            return filterResults;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            mDataFiltered=(List<Cart_Objects>)results.values;
+            notifyDataSetChanged();
+        }
+    };
+
+
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView PName,Price,closeThis;
+        private TextView PName,Price;
+        private ImageButton closeThis;
         private ImageView PImage;
+        private MaterialCardView container;
         private ElegantNumberButton numberButton;
 
         MyViewHolder(View view) {
@@ -164,6 +182,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.MyViewHolder
             PImage = itemView.findViewById(R.id.pImage);
             Price = itemView.findViewById(R.id.cAmount);
             numberButton=itemView.findViewById(R.id.elegant);
+            container=itemView.findViewById(R.id.smartContainer);
 
         }
     }

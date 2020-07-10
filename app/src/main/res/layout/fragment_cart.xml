@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorgrey"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CartFragment">
     <RelativeLayout
@@ -37,13 +38,19 @@
         android:drawableRight="@drawable/ic_shopping_cart_black_24dp"
         android:id="@+id/text"
         android:layout_height="wrap_content"/>
-    <View
-        android:id="@+id/vx"
-        android:layout_below="@+id/text"
-       android:background="@android:color/darker_gray"
-        android:layout_marginBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_below="@+id/text"
+            android:inputType="text"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:hint="Search Item In Cart"
+            android:drawablePadding="10dp"
+            android:drawableTint="@android:color/holo_orange_dark"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:background="@drawable/search_design"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
     <LinearLayout
         android:id="@+id/emptyLay"
         android:visibility="gone"
@@ -56,8 +63,22 @@
 
     </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/finisedOrder"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/finished_layout"/>
+
+        </LinearLayout>
+
+
     <LinearLayout
-        android:layout_below="@+id/vx"
+        android:layout_below="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,37 +25,42 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.eyitapp.HttpLinks.imagePath;
 
-public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHolder> {
+public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHolder> implements Filterable {
 
-    private Context mCtx;
+    Context mCtx;
+    List<Home_Objects> mData;
+    List<Home_Objects> mDataFiltered;
 
-    private List<Home_Objects> productList;
+    public Home_Adapter(Context context, List<Home_Objects> mData) {
+        this.mCtx = context;
+        this.mData = mData;
+        this.mDataFiltered = mData;
 
-    public Home_Adapter(Context mCtx, List<Home_Objects> objects) {
-        this.mCtx = mCtx;
-        this.productList = objects;
     }
 
     @Override
     public TipViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.row_product, null);
+        View view = inflater.inflate(R.layout.row_product, parent,false);
         return new TipViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final TipViewHolder holder, final int position) {
-        final Home_Objects product = productList.get(position);
+        final Home_Objects product = mDataFiltered.get(position);
         final String savedImage=imagePath+""+product.getId() +".jpg";
          int total;
 
             Glide.with(mCtx)
                     .load(savedImage)
                     .into(holder.PImage);
+            holder.PImage.setAnimation(AnimationUtils.loadAnimation(mCtx,R.anim.fade_in_transition));
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mCtx,R.anim.fade_scale_transition));
         holder.PName.setText(product.getName());
         holder.Price.setText(String.valueOf(product.getPrice()));
         holder.category.setText(String.valueOf(product.getCategory()));
@@ -78,7 +87,6 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
                     holder.removeSpot.setVisibility(View.GONE);
                     holder.addCart.setVisibility(View.VISIBLE);
                 }
-
 
             }
 
@@ -142,12 +150,56 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return mDataFiltered.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return myFilterData;
+    }
+
+
+    private Filter myFilterData = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String key=constraint.toString();
+            if (key.isEmpty()){
+                mDataFiltered=mData;
+            }
+            else{
+                List<Home_Objects> FilteredList=new ArrayList<>();
+                for (Home_Objects row: mData){
+                    if (row.getName().toString().contains(key) || row.getCategory().toString().contains(key)){
+                        FilteredList.add(row);
+                    }
+                }
+
+                mDataFiltered=FilteredList;
+            }
+          FilterResults  filterResults=new FilterResults();
+            filterResults.values=mDataFiltered;
+            return filterResults;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            mDataFiltered=(List<Home_Objects>)results.values;
+//            mData.clear();
+//            mData.addAll((Collection<? extends Home_Objects>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
     class TipViewHolder extends RecyclerView.ViewHolder {
         private TextView PName,Price,category;
         private ImageView PImage;
         private ImageButton addCart,removeSpot;
+        private MaterialCardView container;
         public TipViewHolder(View itemView) {
             super(itemView);
 
@@ -157,6 +209,7 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
             category = itemView.findViewById(R.id.category);
             addCart=itemView.findViewById(R.id.addCart);
             removeSpot=itemView.findViewById(R.id.removeSpot);
+            container=itemView.findViewById(R.id.smartContainer);
         }
     }
 

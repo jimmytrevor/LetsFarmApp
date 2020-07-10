@@ -66,7 +66,7 @@ public class HttpParse {
                 FinalHttpData = bufferedReader.readLine();
             }
             else {
-                FinalHttpData = "Something Went Wrong";
+                    FinalHttpData = "Connection Interrupted Target Machine Error";
             }
         } catch (Exception e) {
             e.printStackTrace();

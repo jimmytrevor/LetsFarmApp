@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +50,26 @@ public class ProfileFragment extends Fragment {
         final ImageView userImage=view.findViewById(R.id.userImage);
         final TextView userName=view.findViewById(R.id.userName);
         final TextView userPhone=view.findViewById(R.id.userPhone);
+        final LinearLayout containerProfile=view.findViewById(R.id.smartContainer);
+       containerProfile.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+
 //
 //        final Button openShare=view.findViewById(R.id.openShare);
 //        final Button openBug =view.findViewById(R.id.openBug);
         final MaterialCardView openSuggest=view.findViewById(R.id.openSuggets);
+        final MaterialCardView opeShare=view.findViewById(R.id.opeShare);
+        final MaterialCardView openDebug=view.findViewById(R.id.openDebug);
+        final MaterialCardView openRate=view.findViewById(R.id.openRate);
+        final MaterialCardView openAbout=view.findViewById(R.id.openAbout);
+        final MaterialCardView openSetting=view.findViewById(R.id.openSetting);
 
+
+        openSuggest.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+        opeShare.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+        openDebug.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+        openRate.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+        openAbout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
+        openSetting.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
 
         openSuggest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +84,6 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
-
         String FindPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("Profile").child("Clients");
         Query query=databaseReference.orderByChild("Phone").equalTo(FindPhone);

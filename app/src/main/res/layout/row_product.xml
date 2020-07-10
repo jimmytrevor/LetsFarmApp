@@ -8,12 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:padding="5dp"
+        android:id="@+id/smartContainer"
         card_view:cardBackgroundColor="#ffffff"
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="1dp">
         <LinearLayout
+
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -32,6 +34,7 @@
                     android:src="@drawable/ic_pin"
                     android:layout_height="90dp"/>
                 <LinearLayout
+
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:layout_margin="3dp"
@@ -124,7 +127,6 @@
                             android:src="@drawable/ic_remove_black_24dp"
                             />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

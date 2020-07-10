@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -54,20 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
         Animation appAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
         ImageView imageView=findViewById(R.id.appLogo);
-        imageView.setAnimation(appAnim);
-
-
-//        LazyLoader loader = new LazyLoader(this, 30, 20, ContextCompat.getColor(this, R.color.loader_selected),
-//                ContextCompat.getColor(this, R.color.loader_selected),
-//                ContextCompat.getColor(this, R.color.loader_selected));
-//        loader.setAnimDuration(500);
-//        loader.setFirstDelayDuration(100);
-//        loader.setSecondDelayDuration(200);
-//        loader.setInterpolator(new LinearInterpolator());
-//        loader.addView(loader);
-
-
-
+        TextView appName=findViewById(R.id.AppName);
+        imageView.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
+        appName.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
 
         getConnectionService();
     }

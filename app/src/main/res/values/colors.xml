@@ -20,7 +20,7 @@
     <!-- dots active colors -->
     <color name="dot_light_screen3">#9FA39F</color>
     <color name="dot_light_screen5">#9FA39F</color>
-    <color name="colorgrey">#9FA39F</color>
+    <color name="colorgrey">#f2f3f5</color>
 
 
     <array name="array_dot_active">
