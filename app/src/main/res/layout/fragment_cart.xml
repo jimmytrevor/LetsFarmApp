@@ -46,7 +46,7 @@
             android:padding="10dp"
             android:hint="Search Item In Cart"
             android:drawablePadding="10dp"
-            android:drawableTint="@android:color/holo_orange_dark"
+            android:drawableTint="@color/search_drawable"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:background="@drawable/search_design"
             android:layout_width="match_parent"
@@ -63,7 +63,6 @@
 
     </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/finisedOrder"
             android:visibility="gone"
@@ -73,9 +72,7 @@
             android:layout_height="match_parent">
 
             <include layout="@layout/finished_layout"/>
-
         </LinearLayout>
-
 
     <LinearLayout
         android:layout_below="@+id/search_input"
@@ -112,7 +109,6 @@
     </LinearLayout>
     </RelativeLayout>
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/orderView"
         android:layout_width="match_parent"
@@ -123,7 +119,5 @@
 
         <include layout="@layout/order_detailes"/>
     </androidx.core.widget.NestedScrollView>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout >

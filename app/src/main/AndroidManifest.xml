@@ -19,6 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity android:name=".OrderActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.R"
             ></activity>
         <activity android:name=".TestActivity"></activity>

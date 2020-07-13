@@ -1,5 +1,6 @@
 package com.example.eyitapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +97,18 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
             }
         };
 
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(mCtx)
+                        .setTitle(""+product.getName())
+                        .setMessage(""+product.getDescription())
+                        .setCancelable(true);
+                AlertDialog dialog=builder.create();
+                dialog.show();
+            }
+        });
+
 
         holder.addCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,7 +184,7 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
             else{
                 List<Home_Objects> FilteredList=new ArrayList<>();
                 for (Home_Objects row: mData){
-                    if (row.getName().toString().contains(key) || row.getCategory().toString().contains(key)){
+                    if (row.getName().toString().contains(key) || row.getCategory().toString().contains(key) || row.getName().equalsIgnoreCase(key) || row.getName().toLowerCase().contains(key) || row.getName().toUpperCase().contains(key) || row.getCategory().toUpperCase().contains(key)){
                         FilteredList.add(row);
                     }
                 }

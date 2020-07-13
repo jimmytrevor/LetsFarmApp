@@ -57,6 +57,7 @@ public class Single_Adapter  extends RecyclerView.Adapter<Single_Adapter.TipView
         holder.SingleQuantity.setText(""+product.getQuantity());
         holder.SingleName.setText(""+product.getName());
         holder.SinglePrice.setText(""+product.getSingle_Price());
+        holder.unitPrice.setText("@"+(product.getSingle_Price() / product.getQuantity()));
         holder.container.setAnimation(AnimationUtils.loadAnimation(mCtx,R.anim.fade_in_transition));
 
 
@@ -108,12 +109,13 @@ public class Single_Adapter  extends RecyclerView.Adapter<Single_Adapter.TipView
         }
     };
     class TipViewHolder extends RecyclerView.ViewHolder {
-        private TextView SingleName,SinglePrice,SingleQuantity;
+        private TextView SingleName,SinglePrice,SingleQuantity,unitPrice;
         private ImageView SingleImage;
         private MaterialCardView container;
         public TipViewHolder(View itemView) {
             super(itemView);
             SingleName=itemView.findViewById(R.id.SingleName);
+            unitPrice=itemView.findViewById(R.id.unitPrice);
             SinglePrice=itemView.findViewById(R.id.SinglePrice);
             SingleQuantity=itemView.findViewById(R.id.singleQuantity);
             SingleImage=itemView.findViewById(R.id.singleImage);

@@ -1,12 +1,21 @@
 package com.example.eyitapp;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,9 +34,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -43,6 +55,7 @@ import java.util.List;
 
 import static com.example.eyitapp.HttpLinks.getProducts;
 import static com.example.eyitapp.HttpLinks.saveOrder;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 
 /**
@@ -92,7 +105,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_cart, container, false);
+        final View view =inflater.inflate(R.layout.fragment_cart, container, false);
         View view2 =inflater.inflate(R.layout.delete_cart, container, false);
         recyclerView =view.findViewById(R.id.carRecycle);
         progress=view.findViewById(R.id.progressLay);
@@ -159,24 +172,49 @@ public class CartFragment extends Fragment {
         process.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int num=(int)(1352+(Math.random())*4534);
-                userHolder=FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-                for (int i=0;i<=postsList.size();i++){
-                    try {
-                        IdHolder=String.valueOf(postsList.get(i).getID());
-                        QuantityHolder=String.valueOf(postsList.get(i).getQuantity());
-                        priceHolder=String.valueOf(postsList.get(i).getPrice());
-                        UIDHolder=String.valueOf(num);
-                        FinePriceHolder=final_price.getText().toString();
-                        TotalHolder=String.valueOf(postsList.size());
-                        nameHolder=postsList.get(i).getName().toString();
+                View confirmView=getLayoutInflater().inflate(R.layout.confirm_alert,null);
+                AlertDialog.Builder builder=new AlertDialog.Builder(getContext())
+                        .setCancelable(false)
+                        .setView(confirmView);
+                final AlertDialog dialog=builder.create();
+                dialog.show();
 
-                        DataUploadToServerFunction(userHolder,IdHolder,QuantityHolder,priceHolder,UIDHolder,FinePriceHolder,TotalHolder,nameHolder);
+                TextView review=confirmView.findViewById(R.id.review);
+                TextView save=confirmView.findViewById(R.id.save);
 
-                    }catch (Exception e){
-//                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                review.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
-                }
+                });
+
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+
+                        int num=(int)(1352+(Math.random())*4534);
+                        userHolder=FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+                        for (int i=0;i<=postsList.size();i++){
+                            try {
+                                IdHolder=String.valueOf(postsList.get(i).getID());
+                                QuantityHolder=String.valueOf(postsList.get(i).getQuantity());
+                                priceHolder=String.valueOf(postsList.get(i).getPrice());
+                                UIDHolder=String.valueOf(num);
+                                FinePriceHolder=final_price.getText().toString();
+                                TotalHolder=String.valueOf(postsList.size());
+                                nameHolder=postsList.get(i).getName().toString();
+
+                                DataUploadToServerFunction(userHolder,IdHolder,QuantityHolder,priceHolder,UIDHolder,FinePriceHolder,TotalHolder,nameHolder);
+
+                            }catch (Exception e){
+//                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
 
             }
         });
@@ -286,7 +324,6 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
@@ -308,7 +345,7 @@ public class CartFragment extends Fragment {
 
     }
 
-    public void DataUploadToServerFunction(String orderUser,String productID,String Quantity,String Price,String gIDHolder,String FinePrice,String TotalHold,String name){
+    public void DataUploadToServerFunction(String orderUser, String productID, String Quantity, String Price, String gIDHolder, String FinePrice, final String TotalHold, String name){
         class AsyncTaskUploadClass extends AsyncTask<String,Void,String> {
 
             @Override
@@ -333,9 +370,32 @@ public class CartFragment extends Fragment {
                 if (string1.contains("Server Error") || string1.equals("Server Error")){
                     Toast.makeText(getContext(),"Something Wrong Just Happened : "+string1,Toast.LENGTH_LONG).show();
                 }
+                else if (string1.contains("Pending") || string1.contains("pending")){
+                    loadNotification();
+                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                }
+                else if (string1.contains("Target Machine Error") || string1.contains("Target Machine Error") || string1.equalsIgnoreCase("Connection Interrupted Target Machine Error") || string1.contains("Error") || string1.contains("error")){
+                    loadError();
+                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                }
+                else if (string1.equals("") || string1.equalsIgnoreCase(" ")){
+                    loadError();
+                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                }
                 else{
                     reference.removeValue();
                     postsList.removeAll(postsList);
+                    reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+//                            Toast.makeText(getContext(), "Cart Cleared", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     empty.setVisibility(View.GONE);
                     finished.setVisibility(View.VISIBLE);
@@ -367,6 +427,86 @@ public class CartFragment extends Fragment {
         userRegisterFunctionClass.execute(userHolder,IdHolder,QuantityHolder,priceHolder,UIDHolder,FinePriceHolder,TotalHolder,nameHolder);
     }
 
+    public  void loadError(){
+        int NOTIFICATION_ID = 234;
+        @SuppressLint("RestrictedApi") NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        String CHANNEL_ID = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+            CHANNEL_ID = "my_zone_02";
+            CharSequence name = "Order Error";
+            String Description = "Lets Notification Service";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.setLightColor(R.color.colorPrimary);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(false);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        RemoteViews collapse=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+        RemoteViews expand=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+
+        assert CHANNEL_ID != null;
+        @SuppressLint("RestrictedApi") NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.safe)
+               .setSubText("Order Error")
+                .setContentText("Hey, Your Order on Lets Farm App didn't complete. Server Detected. Try again")
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle());
+
+
+        @SuppressLint("RestrictedApi") Intent resultIntent = new Intent(getApplicationContext(), HomeActivity.class);
+        @SuppressLint("RestrictedApi") TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+        stackBuilder.addParentStack(HomeActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+    }
+    public  void loadNotification(){
+        int NOTIFICATION_ID = 234;
+        @SuppressLint("RestrictedApi") NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        String CHANNEL_ID = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+            CHANNEL_ID = "my_zone_01";
+            CharSequence name = "Pending Order";
+            String Description = "Lets Notification Service";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.setLightColor(R.color.colorPrimary);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(false);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        RemoteViews collapse=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+        RemoteViews expand=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+
+        assert CHANNEL_ID != null;
+        @SuppressLint("RestrictedApi") NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.safe)
+                .setCustomContentView(collapse)
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomBigContentView(expand);
+
+
+        @SuppressLint("RestrictedApi") Intent resultIntent = new Intent(getApplicationContext(), HomeActivity.class);
+        @SuppressLint("RestrictedApi") TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+        stackBuilder.addParentStack(HomeActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+    }
 
 
 

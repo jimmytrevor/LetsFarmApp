@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(tool);
         fadeIn(tool);
         setFragment(new HomeFragment());
-        tool.setTitle("Prodcut List");
+        tool.setTitle("Product List");
 
             String tag = getIntent().getStringExtra("Tag");
            if (tag == null){

@@ -13,12 +13,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth auth;
+    LinearLayout progress,dataLay,denial;
+    TextView com1,com2,com3,version,com4;
+
 
 
     @Override
@@ -56,8 +61,75 @@ public class MainActivity extends AppCompatActivity {
         Animation appAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
         ImageView imageView=findViewById(R.id.appLogo);
         TextView appName=findViewById(R.id.AppName);
+        progress=findViewById(R.id.progressLay);
+        denial=findViewById(R.id.inform);
+        com1=findViewById(R.id.communicate1);
+        com2=findViewById(R.id.communicate2);
+        com3=findViewById(R.id.communicate3);
+        com4=findViewById(R.id.communicate4);
+        version=findViewById(R.id.version);
+        dataLay=findViewById(R.id.lay1);
         imageView.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
         appName.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
+
+
+
+        com2.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_in_transition));
+        com3.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_in_transition));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dataLay.setVisibility(View.GONE);
+                version.setVisibility(View.GONE);
+                progress.setVisibility(View.VISIBLE);
+                denial.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        com1.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in_transition));
+                        com1.setVisibility(View.VISIBLE);
+                        com2.setVisibility(View.GONE);
+                        com3.setVisibility(View.GONE);
+                        com4.setVisibility(View.GONE);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                com2.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in_transition));
+                                com2.setVisibility(View.VISIBLE);
+                                com1.setVisibility(View.GONE);
+                                com3.setVisibility(View.GONE);
+                                com4.setVisibility(View.GONE);
+                            ;
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        com3.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in_transition));
+                                        com3.setVisibility(View.VISIBLE);
+                                        com2.setVisibility(View.GONE);
+                                        com1.setVisibility(View.GONE);
+                                        com4.setVisibility(View.GONE);
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                com4.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in_transition));
+                                                com4.setVisibility(View.VISIBLE);
+                                                com2.setVisibility(View.GONE);
+                                                com1.setVisibility(View.GONE);
+                                                com3.setVisibility(View.GONE);
+
+                                            }
+                                        },10000);
+                                    }
+                                },10000);
+                            }
+                        },10000);
+                    }
+                },10000);
+            }
+        },5000);
+
+
 
         getConnectionService();
     }
@@ -127,8 +199,20 @@ public class MainActivity extends AppCompatActivity {
                     if (getUser > 0 ){
 
 //                    user found
-                        checkPermission();
+
 //                        finish();
+
+                        for (DataSnapshot ds: dataSnapshot.getChildren()){
+                            String access= (String) ds.child("Access").getValue();
+                           if (access.contains("on") || access.equalsIgnoreCase("on") || access.equals("on")){
+                               checkPermission();
+                           }
+                           else {
+                               progress.setVisibility(View.GONE);
+                               dataLay.setVisibility(View.GONE);
+                               denial.setVisibility(View.VISIBLE);
+                           }
+                        }
 
                     }
                     else{

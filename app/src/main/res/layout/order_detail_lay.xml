@@ -1,19 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/colorgrey"
     android:layout_height="match_parent">
+
+
+    <GridLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="1">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:id="@+id/openSuggets"
+            card_view:cardBackgroundColor="#ffffff"
+            card_view:cardCornerRadius="5dp"
+            card_view:contentPadding="10dp"
+            android:layout_columnWeight="1">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="20dp"
+                    android:textColor="@color/black"
+                    android:padding="7dp"
+                    android:layout_weight="1"
+                    android:drawableTint="@android:color/holo_green_light"
+                    android:drawableLeft="@drawable/ic_star_border_black_24dp"
+                    android:text="See This Order Rating Scale"/>
+
+
+                <TextView
+                    android:id="@+id/rateShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:drawablePadding="20dp"
+                    android:layout_weight="5"
+                    android:text="1/5"
+                    android:textColor="@color/pink"
+                    android:padding="7dp" />
+            </LinearLayout>
+                <RatingBar
+                    android:id="@+id/rateOrder"
+                    style="@style/RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:outlineAmbientShadowColor="@color/white"
+                    android:saveEnabled="true"
+                    android:clickable="false"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:progressTint="@color/pink"
+                    android:stepSize="0.5"/>
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </GridLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
-        android:text="Products in The Order"
+        android:text="Order Items"
         android:padding="10dp"
         android:drawablePadding="20dp"
         android:fontFamily="serif-monospace"
         android:textSize="18sp"
-        android:drawableRight="@drawable/ic_add_shopping_cart_black_24dp"
+        android:textStyle="bold"
+        android:layout_weight="1"
         android:id="@+id/text"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/deleteOrder"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="CANCEL"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:drawablePadding="30dp"
+        android:drawableLeft="@drawable/ic_close_black_24dp"
+        android:textAllCaps="true"
+        android:drawableTint="@android:color/black"
+        android:textColor="@color/white"
+        android:background="@drawable/borderless2"
+        android:backgroundTint="@color/pink"
+        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp" />
+</LinearLayout>
+
     <LinearLayout
         android:layout_below="@+id/text"
         android:layout_width="match_parent"
@@ -29,7 +132,7 @@
             android:padding="10dp"
             android:hint="Quick Item Search"
             android:drawablePadding="10dp"
-            android:drawableTint="@android:color/holo_orange_dark"
+            android:drawableTint="@color/search_drawable"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:background="@drawable/search_design"
             android:layout_width="match_parent"

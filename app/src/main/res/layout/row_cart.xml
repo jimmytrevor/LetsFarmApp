@@ -127,10 +127,10 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            card_view:textColor="@android:color/holo_orange_dark"
+                            card_view:textColor="@android:color/black"
                             android:backgroundTint="@color/white"
                             card_view:backGroundColor="@color/white"
-                            card_view:finalNumber="10000"
+                            card_view:finalNumber="1000000"
                             card_view:initialNumber="1"
                             android:layout_gravity="center"
                             />

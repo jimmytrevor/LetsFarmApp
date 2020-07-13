@@ -26,7 +26,7 @@
         android:padding="10dp"
         android:hint="Search For Item"
         android:drawablePadding="10dp"
-        android:drawableTint="@android:color/holo_orange_dark"
+        android:drawableTint="@color/search_drawable"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         android:background="@drawable/search_design"
         android:layout_width="match_parent"

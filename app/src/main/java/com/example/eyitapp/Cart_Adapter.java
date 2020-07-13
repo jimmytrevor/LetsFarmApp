@@ -115,6 +115,8 @@ final int intial_price=mDataFiltered.get(position).getPrice();
                         reference.child(keys.get(position)).removeValue();
                         Toast.makeText(mContext, ""+mDataFiltered.get(position).getName()+" removed from Cart", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+//                        mDataFiltered.clear();
+//                        mData.clear();
                         mContext.startActivity(new Intent(mContext.getApplicationContext(),HomeActivity.class).putExtra("Tag","Cart"));
 
                     }

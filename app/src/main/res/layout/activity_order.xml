@@ -21,24 +21,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <ImageButton
+        android:padding="10dp"
+        android:id="@+id/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:tint="@color/white"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/borderless"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+    <ScrollView
+        android:layout_below="@id/toolbar"
+        android:id="@+id/progressScrol"
+        android:visibility="visible"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <LinearLayout
         android:id="@+id/orderLay"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_below="@id/toolbar"
         android:layout_height="wrap_content">
         <include layout="@layout/detail_header"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_below="@id/orderLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <include layout="@layout/order_detail_lay"/>
-    </LinearLayout>>
+    </LinearLayout>
 
-
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

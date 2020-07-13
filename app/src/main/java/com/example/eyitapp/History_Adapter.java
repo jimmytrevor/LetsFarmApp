@@ -57,7 +57,10 @@ public class History_Adapter  extends RecyclerView.Adapter<History_Adapter.TipVi
             status="Pending";
         }
         else if (statusID == 2){
-            status="Processed";
+            status="Accepted";
+        }
+        else if (statusID == 3){
+            status="Delivered";
         }
         else {
             status="Cancelled";

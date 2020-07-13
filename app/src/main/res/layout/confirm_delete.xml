@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:fontFamily="monospace"
+        android:text="Delete Alert"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_warning_black_24dp"
+        android:textColor="@color/black"
+        android:drawablePadding="20dp"
+        android:drawableTint="@color/red_primary"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:textAlignment="textStart"
+        android:text="By Clicking Cancel, This order will be permanently deleted and if successful, the operation cannot be reversed. Make sure you delete it when its worth deleting otherwise Keep. "
+        android:gravity="start" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/leave_me"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:text="KEEP"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/ic_view_list_black_24dp"
+            android:textAllCaps="true"
+            android:drawableTint="@android:color/holo_orange_dark"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginEnd="1dp"
+            android:backgroundTint="@color/colorgrey"
+            android:background="@drawable/borderless"
+            android:paddingLeft="20dp" />
+
+        <TextView
+            android:id="@+id/go_delete"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:text="CANCEL"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/ic_close_black_24dp"
+            android:textAllCaps="true"
+            android:drawableTint="@android:color/holo_red_dark"
+            android:textColor="@color/red_primary"
+            android:textStyle="bold"
+            android:background="@drawable/borderless2"
+            android:backgroundTint="@color/colorgrey"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+</LinearLayout>

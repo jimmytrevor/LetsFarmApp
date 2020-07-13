@@ -160,8 +160,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 else{
-                    Toast.makeText(ProfileActivity.this, ""+getGender, Toast.LENGTH_SHORT).show();
-
 //                    upload information
                     getProgress.setVisibility(View.VISIBLE);
                     scrollView.setVisibility(View.GONE);
@@ -195,7 +193,7 @@ public class ProfileActivity extends AppCompatActivity {
                                        int minute=calendar.get(Calendar.MINUTE);
                                        int second=calendar.get(Calendar.SECOND);
                                        String time=String.valueOf(hour+":"+minute+":"+second);
-
+                                        db.child("Access").setValue("on");
                                         db.child("Time").setValue(time);
                                         db.child("Date").setValue(currentDate);
                                         db.child("Gender").setValue(getGender);
@@ -267,7 +265,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-            startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
+            startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             finish();
 
     }
