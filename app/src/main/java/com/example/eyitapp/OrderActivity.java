@@ -96,7 +96,7 @@ public class OrderActivity extends AppCompatActivity {
         orderID.setText(""+getIntent().getStringExtra("ID"));
         subPrice.setText("UGX "+getIntent().getStringExtra("PRICE"));
         totalPrice.setText("UGX "+getIntent().getStringExtra("PRICE"));
-        orderStatus.setText(""+getIntent().getStringExtra("STATUS"));
+
         totalProduct.setText(""+getIntent().getStringExtra("PRODUCTS"));
         dollars.setText("$ "+getIntent().getStringExtra("DOLLARS"));
         List = new ArrayList<>();
@@ -106,8 +106,22 @@ public class OrderActivity extends AppCompatActivity {
 
         adapter = new Single_Adapter(this, List);
         orderIDHolder=""+getIntent().getStringExtra("ID");
+        if (getIntent().getStringExtra("STATUS").equals("1")){
+            orderStatus.setText("Pending");
+        }
+      else  if (getIntent().getStringExtra("STATUS").equals("2")){
+        orderStatus.setText("Accepted");
+        }
+        else  if (getIntent().getStringExtra("STATUS").equals("3")){
+         orderStatus.setText("Delivered");
+        }
+        else if (getIntent().getStringExtra("STATUS").equals("4")){
 
-        if (getIntent().getStringExtra("STATUS").equalsIgnoreCase("Pending")){
+            orderStatus.setText("Cancelled");
+        }
+
+
+        if (getIntent().getStringExtra("STATUS").equalsIgnoreCase("1") || getIntent().getStringExtra("STATUS").equals("1")){
             delete.setVisibility(View.VISIBLE);
         }
         else {

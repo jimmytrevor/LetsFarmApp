@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3898E7</color>
-    <color name="colorPrimaryDark">#3898E7</color>
-    <color name="colorAccent">#3898E7</color>
+    <color name="colorPrimary">#5091f9</color>
+    <color name="colorPrimaryDark">#5091f9</color>
+    <color name="colorAccent">#5091f9</color>
+
+
+<!--    <color name="colorPrimary">#3898E7</color>-->
+<!--    <color name="colorPrimaryDark">#3898E7</color>-->
+<!--    <color name="colorAccent">#3898E7</color>-->
 
     <color name="white">#FFFFFF</color>
     <color name="blue">#3F51B5</color>
@@ -10,6 +15,7 @@
     <color name="search">#2E2D2D</color>
     <color name="search_drawable">#3898E7</color>
     <color name="color_test">#EEE2E0E0</color>
+    <color name="phone_color">#EE270D3C</color>
 
     <color name="pink">#FF4081</color>
 

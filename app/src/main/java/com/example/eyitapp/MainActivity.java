@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        startActivity ( new Intent( MainActivity.this , HomeActivity.class ) );
+                        startActivity ( new Intent( MainActivity.this , DashboardActivity.class ) );
                         finish();
                     }
 

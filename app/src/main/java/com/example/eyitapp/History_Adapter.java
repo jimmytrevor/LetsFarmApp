@@ -83,7 +83,7 @@ public class History_Adapter  extends RecyclerView.Adapter<History_Adapter.TipVi
                         .putExtra("ID",String.valueOf(product.getID()))
                         .putExtra("DOLLARS",String.valueOf(doll))
                         .putExtra("PRICE",String.valueOf(product.getPrice()))
-                        .putExtra("STATUS",status)
+                        .putExtra("STATUS",String.valueOf(product.getOrder_status_ID()))
                         .putExtra("DATE",product.getDateMade())
                         .putExtra("PRODUCTS",String.valueOf(product.getTotalProducts())));
             }

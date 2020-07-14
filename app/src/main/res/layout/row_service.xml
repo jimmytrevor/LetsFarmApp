@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/smartContainer1"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:padding="10dp"
+        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardCornerRadius="10dp"
+        card_view:contentPadding="20dp"
+        android:layout_marginRight="5dp">
+        <LinearLayout
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="80dp"
+                android:tint="@color/colorgrey"
+                android:src="@drawable/ic_add_shopping_cart_black_24dp"
+                android:layout_height="80dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="Cart Items"
+                android:gravity="center"
+                android:padding="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="...."
+                android:id="@+id/countCart"
+                android:gravity="center"
+                android:background="@drawable/border_less_square"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/smartContainer2"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:padding="10dp"
+        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardCornerRadius="10dp"
+        card_view:contentPadding="20dp"
+        android:layout_marginRight="5dp">
+        <LinearLayout
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:tint="@color/colorgrey"
+                android:src="@drawable/ic_shopping_basket_black_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="Yo Orders"
+                android:gravity="center"
+                android:padding="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="...."
+                android:id="@+id/countAll"
+                android:gravity="center"
+                android:background="@drawable/border_less_square"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/smartContainer3"
+        android:gravity="center"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:padding="10dp"
+        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardCornerRadius="10dp"
+        card_view:contentPadding="20dp"
+        android:layout_marginRight="5dp">
+        <LinearLayout
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="80dp"
+                android:tint="@color/colorgrey"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                android:layout_height="80dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="Pending"
+                android:gravity="center"
+                android:padding="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="...."
+                android:id="@+id/countPending"
+                android:gravity="center"
+                android:background="@drawable/border_less_square"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/smartContainer4"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:padding="10dp"
+        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardCornerRadius="10dp"
+        card_view:contentPadding="20dp"
+        android:layout_marginRight="5dp">
+        <LinearLayout
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="80dp"
+                android:tint="@color/colorgrey"
+                android:src="@drawable/ic_star_border_black_24dp"
+                android:layout_height="80dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="Rating"
+                android:gravity="center"
+                android:padding="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="0 starts"
+                android:gravity="center"
+                android:id="@+id/countStars"
+                android:background="@drawable/border_less_square"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

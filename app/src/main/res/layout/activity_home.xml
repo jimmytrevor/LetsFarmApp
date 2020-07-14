@@ -8,6 +8,10 @@
     android:fitsSystemWindows="true"
     tools:context=".HomeActivity">
 
+
+
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
@@ -20,7 +24,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
+    <ImageButton
+        android:padding="10dp"
+        android:id="@+id/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:tint="@color/white"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/borderless"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_arrow_back_black_24dp"/>
 
 
 
@@ -45,8 +60,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@android:color/holo_orange_dark"
+        app:itemIconTint="@drawable/item_color"
+        app:itemTextColor="@drawable/item_color"
+        app:itemBackground="@drawable/item_selector"
         app:menu="@menu/home_menue_item" />
 
 </RelativeLayout>

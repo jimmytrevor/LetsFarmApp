@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,6 +20,8 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     FrameLayout frameLayout;
     Toolbar tool;
+    ImageButton go_back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         navigationView=findViewById(R.id.nav_view);
         frameLayout=findViewById(R.id.frame);
+        go_back=findViewById(R.id.go_back);
         tool=findViewById(R.id.toolbar);
         setSupportActionBar(tool);
         fadeIn(tool);
@@ -53,16 +59,20 @@ public class HomeActivity extends AppCompatActivity {
                         tool.setTitle("Orders Track");
                         setFragment(new HistoryFragment());
                         return true;
-                    case R.id.Account:
-                            tool.setTitle("Profile & Setting");
-                        setFragment(new ProfileFragment());
-                        return true;
                         default:
                             return false;
                 }
 
             }
         });
+
+           go_back.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   startActivity(new Intent(HomeActivity.this,DashboardActivity.class));
+                   finish();
+               }
+           });
     }
 
 //    Transacting fragments
@@ -77,17 +87,4 @@ private void fadeIn(View view){
     view.setVisibility(View.VISIBLE);
 
 }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_activity_items,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId=item.getItemId();
-
-        return super.onOptionsItemSelected(item);
-    }
 }

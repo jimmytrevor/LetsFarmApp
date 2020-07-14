@@ -15,9 +15,9 @@
         android:icon="@drawable/ic_shopping_basket_black_24dp"
         android:title="Basket" />
 
-    <item
-        android:id="@+id/Account"
-        android:icon="@drawable/ic_person_outline_black_24dp"
-        android:title="Account" />
+<!--    <item-->
+<!--        android:id="@+id/Account"-->
+<!--        android:icon="@drawable/ic_person_outline_black_24dp"-->
+<!--        android:title="Account" />-->
 
 </menu>

@@ -18,13 +18,28 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".OrderActivity"
+        <activity
+            android:name=".YoProfileActivity"
+            android:label="Yo-Profile"
+            android:parentActivityName=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.eyitapp.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".DashboardActivity"
+            android:label="Yo Dashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.R"
-            ></activity>
-        <activity android:name=".TestActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".OrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.R" />
+        <activity android:name=".TestActivity" />
         <activity
             android:name=".HomeActivity"
+            android:label="Yo-Feed"
             android:theme="@style/AppTheme.NoActionBar.R" />
         <activity android:name=".ProfileActivity" />
         <activity

@@ -14,6 +14,7 @@
         card_view:cardBackgroundColor="#ffffff"
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="1dp">
+
         <LinearLayout
 
             android:layout_gravity="center"

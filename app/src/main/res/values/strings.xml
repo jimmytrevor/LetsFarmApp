@@ -11,4 +11,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_yo_profile">Yo-Profile</string>
 </resources>
