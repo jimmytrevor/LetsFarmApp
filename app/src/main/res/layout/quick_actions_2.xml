@@ -18,7 +18,7 @@
             android:columnCount="2">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/openFeed"
+                android:id="@+id/openShare"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -38,7 +38,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:tint="@color/colorgrey"
-                        android:src="@drawable/ic_shopping_basket_black_24dp"
+                        android:src="@drawable/ic_share_black_24dp"
                         android:layout_height="60dp"/>
 
                     <TextView
@@ -47,7 +47,7 @@
                         android:gravity="center"
                         android:layout_columnWeight="1"
                         android:padding="8dp"
-                        android:text="Shop Now"/>
+                        android:text="Share App"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="3dp"
-                android:id="@+id/openPromotion"
+                android:id="@+id/openBug"
                 android:padding="10dp"
                 card_view:cardBackgroundColor="#ffffff"
                 card_view:cardCornerRadius="5dp"
@@ -73,7 +73,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:tint="@color/colorgrey"
-                        android:src="@drawable/ic_format_color_fill_black_24dp"
+                        android:src="@drawable/ic_bug_report_black_24dp"
                         android:layout_height="60dp"/>
                     <TextView
                         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                         android:gravity="center"
                         android:layout_columnWeight="1"
                         android:padding="8dp"
-                        android:text="Promotions"/>
+                        android:text="Report Bug"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </GridLayout>
@@ -98,7 +98,7 @@
                 android:gravity="center"
                 android:layout_margin="3dp"
                 android:padding="10dp"
-                android:id="@+id/openRate"
+                android:id="@+id/openAbout"
                 card_view:cardBackgroundColor="#ffffff"
                 card_view:cardCornerRadius="5dp"
                 card_view:contentPadding="10dp"
@@ -113,7 +113,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:tint="@color/colorgrey"
-                        android:src="@drawable/ic_star_border_black_24dp"
+                        android:src="@drawable/ic_apps_black_24dp"
                         android:layout_height="60dp"/>
 
                     <TextView
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:padding="7dp"
-                        android:text="Rate &amp; Review"/>
+                        android:text="About Us"/>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="3dp"
-                android:id="@+id/openSetting"
+                android:id="@+id/openSuggest"
                 android:padding="10dp"
                 card_view:cardBackgroundColor="#ffffff"
                 card_view:cardCornerRadius="5dp"
@@ -148,7 +148,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:tint="@color/colorgrey"
-                        android:src="@drawable/ic_settings_black_24dp"
+                        android:src="@drawable/ic_open_in_new_black_24dp"
                         android:layout_height="60dp"/>
 
                     <TextView
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:padding="7dp"
-                        android:text="Setting"/>
+                        android:text="Suggest"/>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

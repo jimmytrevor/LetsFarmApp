@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(tool);
         fadeIn(tool);
         setFragment(new HomeFragment());
-        tool.setTitle("Product List");
+        tool.setTitle("Yo Shop");
 
             String tag = getIntent().getStringExtra("Tag");
            if (tag == null){
@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                 int itemSelectd=menuItem.getItemId();
                 switch (itemSelectd){
                     case R.id.home:
-                        tool.setTitle("Dashboard");
+                        tool.setTitle("Yo Shop");
                         setFragment(new HomeFragment());
                         return true;
                     case R.id.Cart:

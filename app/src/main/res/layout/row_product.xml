@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="130dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_gravity="center"
@@ -41,7 +41,7 @@
                     android:layout_margin="3dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -57,6 +57,18 @@
                             android:text="SSEGUJJA JIMMY"
                             android:gravity="start" />
 
+                        <TextView
+                            android:id="@+id/category"
+                            android:layout_weight="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:padding="3dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Frits"
+                            android:gravity="start" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -68,7 +80,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:padding="1dp"
+                            android:padding="4dp"
                             android:text="UGX:"
                             android:fontFamily="serif-monospace"
                             android:gravity="end" />
@@ -78,7 +90,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="textStart"
-                            android:padding="1dp"
+                            android:padding="4dp"
                             android:text="899898"
                             android:fontFamily="serif-monospace"
                             android:textSize="15sp"
@@ -93,41 +105,40 @@
                         android:background="@android:color/white"
                         android:layout_height="1dp"/>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
+
+                    <TextView
+                        android:id="@+id/removeSpot"
+                        android:layout_weight="2"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="textStart"
-                            android:padding="1dp"
-                            android:id="@+id/category"
-                            android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/colorPrimary"
-                            android:gravity="start" />
-                        <ImageButton
-                            android:id="@+id/addCart"
-                            android:layout_weight="2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/borderless2"
-                            android:src="@drawable/ic_add_shopping_cart_black_24dp"
-                            />
-                        <ImageButton
-                            android:visibility="gone"
-                            android:id="@+id/removeSpot"
-                            android:layout_weight="2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:tint="@color/colorPrimary"
-                            android:background="@drawable/borderless2"
-                            android:src="@drawable/ic_remove_black_24dp"
-                            />
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Added To Cart"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="false"
+                        android:textColor="@color/myBlue"
+                        android:textAlignment="center" />
+
+
+                    <TextView
+                        android:id="@+id/addCart"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:text="Add TO CART"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:drawablePadding="30dp"
+                        android:drawableLeft="@drawable/ic_add_shopping_cart_black_24dp"
+                        android:textAllCaps="true"
+                        android:drawableTint="@android:color/holo_orange_dark"
+                        android:textColor="@android:color/holo_orange_dark"
+                        android:background="@drawable/borderless2"
+                        android:paddingLeft="20dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

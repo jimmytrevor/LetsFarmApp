@@ -211,7 +211,7 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
     class TipViewHolder extends RecyclerView.ViewHolder {
         private TextView PName,Price,category;
         private ImageView PImage;
-        private ImageButton addCart,removeSpot;
+        private TextView addCart,removeSpot;
         private MaterialCardView container;
         public TipViewHolder(View itemView) {
             super(itemView);
@@ -220,8 +220,8 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
             PImage = itemView.findViewById(R.id.pImage);
             Price = itemView.findViewById(R.id.pPrice);
             category = itemView.findViewById(R.id.category);
+            removeSpot = itemView.findViewById(R.id.removeSpot);
             addCart=itemView.findViewById(R.id.addCart);
-            removeSpot=itemView.findViewById(R.id.removeSpot);
             container=itemView.findViewById(R.id.smartContainer);
         }
     }

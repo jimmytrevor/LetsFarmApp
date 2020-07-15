@@ -71,7 +71,7 @@ public class CartFragment extends Fragment {
     ArrayList<String> firebaseKeys = new ArrayList<>();
     private  DatabaseReference reference;
     private Cart_Adapter adapter;
-    ImageButton confirm;
+    TextView confirm;
     private NestedScrollView orderView;
     private BottomSheetBehavior behavior;
 
@@ -82,7 +82,7 @@ public class CartFragment extends Fragment {
     List<Cart_Objects> list;
     int count;
     TextView sProducts;
-    ImageButton process;
+    TextView process;
     List<Cart_Objects> postsList;
     String userHolder,priceHolder,FinePriceHolder,nameHolder;
     private EditText search_input;

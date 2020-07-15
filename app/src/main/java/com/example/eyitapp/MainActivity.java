@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Animation appAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
         ImageView imageView=findViewById(R.id.appLogo);
         TextView appName=findViewById(R.id.AppName);
+        TextView appInform=findViewById(R.id.appInform);
         progress=findViewById(R.id.progressLay);
         denial=findViewById(R.id.inform);
         com1=findViewById(R.id.communicate1);
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         dataLay=findViewById(R.id.lay1);
         imageView.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
         appName.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_scale_transition));
+        appInform.setAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_in_transition));
 
 
 
