@@ -1,5 +1,14 @@
 package com.example.eyitapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -11,26 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.TaskStackBuilder;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -41,6 +37,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,16 +50,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.eyitapp.HttpLinks.getProducts;
 import static com.example.eyitapp.HttpLinks.saveOrder;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class CartFragment extends Fragment {
-
+public class CartActivity extends AppCompatActivity {
     private ArrayList<String> proImage = new ArrayList<>();
     private ArrayList<String> proName = new ArrayList<>();
     private ArrayList<Integer> proID = new ArrayList<>();
@@ -78,7 +69,6 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayout progress,empty,finished;
     String userPhone;
-    TextView textView;
     List<Cart_Objects> list;
     int count;
     TextView sProducts;
@@ -86,6 +76,8 @@ public class CartFragment extends Fragment {
     List<Cart_Objects> postsList;
     String userHolder,priceHolder,FinePriceHolder,nameHolder;
     private EditText search_input;
+    Toolbar tool;
+    ImageButton go_back;
 
 
     String IdHolder, QuantityHolder, UIDHolder,TotalHolder;
@@ -96,55 +88,109 @@ public class CartFragment extends Fragment {
     HttpParse httpParse = new HttpParse();
     String finalResult;
     HashMap<String,String> hashMap = new HashMap<>();
-    public CartFragment() {
-        // Required empty public constructor
-    }
 
-
+    MaterialCardView materialCardView1,materialCardView2,materialCardView3,materialCardView4;
+    String FindPhone;
+    TextView countCartItems;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view =inflater.inflate(R.layout.fragment_cart, container, false);
-        View view2 =inflater.inflate(R.layout.delete_cart, container, false);
-        recyclerView =view.findViewById(R.id.carRecycle);
-        progress=view.findViewById(R.id.progressLay);
-        finished=view.findViewById(R.id.finisedOrder);
-        empty=view.findViewById(R.id.emptyLay);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+
+        recyclerView =findViewById(R.id.carRecycle);
+        progress=findViewById(R.id.progressLay);
+        finished=findViewById(R.id.finisedOrder);
+        empty=findViewById(R.id.emptyLay);
         empty.setVisibility(View.GONE);
-        textView=view.findViewById(R.id.text);
-        confirm=view.findViewById(R.id.confirm);
-        process=view.findViewById(R.id.process);
-        search_input=view.findViewById(R.id.search_input);
+        confirm=findViewById(R.id.confirm);
+        process=findViewById(R.id.process);
+        search_input=findViewById(R.id.search_input);
         finished.setVisibility(View.GONE);
         confirm.setVisibility(View.GONE);
 
-        orderView =view.findViewById(R.id.orderView);
+        orderView =findViewById(R.id.orderView);
         behavior = BottomSheetBehavior.from(orderView);
 
 
-        sub_price=view.findViewById(R.id.sub_price);
-        tt_pdts=view.findViewById(R.id.tt_products);
-        dollars=view.findViewById(R.id.dollars);
-        delivery=view.findViewById(R.id.delivery);
-        pay_mode=view.findViewById(R.id.pay_mode);
-        pay_time=view.findViewById(R.id.pay_time);
-        discount_percent=view.findViewById(R.id.discount_percent);
-        discount_price=view.findViewById(R.id.discount_amount);
-        final_price=view.findViewById(R.id.final_price);
+        tool=findViewById(R.id.toolbar);
+        go_back=findViewById(R.id.go_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go_back.setEnabled(false);
+                startActivity(new Intent(CartActivity.this,HomeActivity.class));
+                finish();
+            }
+        });
+        tool.setTitle("Cart Items");
+        setSupportActionBar(tool);
+        fadeIn(tool);
 
-        progressDialog=new ProgressDialog(getContext());
+
+     TextView check=findViewById(R.id.check);
+     check.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             startActivity(new Intent(CartActivity.this,BasketActivity.class));
+         }
+     });
+        sub_price=findViewById(R.id.sub_price);
+        tt_pdts=findViewById(R.id.tt_products);
+        dollars=findViewById(R.id.dollars);
+        delivery=findViewById(R.id.delivery);
+        pay_mode=findViewById(R.id.pay_mode);
+        pay_time=findViewById(R.id.pay_time);
+        discount_percent=findViewById(R.id.discount_percent);
+        discount_price=findViewById(R.id.discount_amount);
+        final_price=findViewById(R.id.final_price);
+
+        progressDialog=new ProgressDialog(CartActivity.this);
+
+
+
+        countCartItems=findViewById(R.id.countCart);
+        materialCardView1=findViewById(R.id.smartContainer1);
+        materialCardView2=findViewById(R.id.smartContainer2);
+        materialCardView3=findViewById(R.id.smartContainer3);
+        materialCardView4=findViewById(R.id.smartContainer4);
+        materialCardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartActivity.this,BasketActivity.class));
+            }
+        });
+        materialCardView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartActivity.this,HomeActivity.class));
+            }
+        });
+        materialCardView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CartActivity.this,DashboardActivity.class));
+            }
+        });
+        FindPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+
+TextView shopNow=findViewById(R.id.shopNow);
+shopNow.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(CartActivity.this,HomeActivity.class));
+    }
+});
 
 
 //        adapter = new Cart_Adapter(process,sProducts,getActivity(),adapter,proName,proImage,proPrice,proID,proQuantiy,getActivity(),reference,firebaseKeys);
         postsList=new ArrayList <> (  );
-        adapter=new Cart_Adapter ( getActivity (), postsList,firebaseKeys);
+        adapter=new Cart_Adapter ( CartActivity.this, postsList,firebaseKeys);
         userPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         reference= FirebaseDatabase.getInstance().getReference().child("Cart").child(userPhone).child("yoCart");
         countCart();
-        confirm.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
-        finished.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_in_transition));
-        empty.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_in_transition));
+        confirm.setAnimation(AnimationUtils.loadAnimation(CartActivity.this,R.anim.fade_scale_transition));
+        finished.setAnimation(AnimationUtils.loadAnimation(CartActivity.this,R.anim.fade_in_transition));
+        empty.setAnimation(AnimationUtils.loadAnimation(CartActivity.this,R.anim.fade_in_transition));
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,9 +205,9 @@ public class CartFragment extends Fragment {
                 sub_price.setText(""+totalPrice);
                 tt_pdts.setText(""+postsList.size());
                 dollars.setText(""+(totalPrice/3716));
-                delivery.setText("Your Location");
                 discount_percent.setText("1%");
                 discount_price.setText("100");
+                delivery.setText("Your Location");
                 sub_price.setText(""+totalPrice);
                 final_price.setText(""+totalPrice);
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -173,7 +219,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 View confirmView=getLayoutInflater().inflate(R.layout.confirm_alert,null);
-                AlertDialog.Builder builder=new AlertDialog.Builder(getContext())
+                AlertDialog.Builder builder=new AlertDialog.Builder(CartActivity.this)
                         .setCancelable(false)
                         .setView(confirmView);
                 final AlertDialog dialog=builder.create();
@@ -238,9 +284,15 @@ public class CartFragment extends Fragment {
         });
 
 
-        return view;
-    }
 
+    }
+    private void fadeIn(View view){
+        AlphaAnimation animation=new AlphaAnimation(0.0f,1.0f);
+        animation.setDuration(1500);
+        view.startAnimation(animation);
+        view.setVisibility(View.VISIBLE);
+
+    }
     private  void countCart(){
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -249,14 +301,14 @@ public class CartFragment extends Fragment {
 
                 if (count > 0){
                     String number="<b><u><big>"+count+"</big></u></b>";
-                    textView.setText(""+Html.fromHtml(number) +" Items in Your Cart");
+                    countCartItems.setText(""+ Html.fromHtml(number) +"");
                     confirm.setVisibility(View.VISIBLE);
 //                    loadObjects();
                     loadUserCart();
                 }
                 else{
                     String number="<b><u><big>"+count+"</big></u></b>";
-                    textView.setText(""+Html.fromHtml(number) +" Items in Your Cart");
+                    countCartItems.setText("Empty");
                     empty.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.GONE);
                     confirm.setVisibility(View.GONE);
@@ -268,11 +320,10 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     private void loadUserCart() {
         reference.keepSynced ( true );
@@ -285,7 +336,7 @@ public class CartFragment extends Fragment {
                     Cart_Objects modelPosts=ds.getValue (Cart_Objects.class);
                     postsList.add ( modelPosts );
                     recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
                     recyclerView.setAdapter(adapter);
                     progress.setVisibility(View.GONE);
                     confirm.setVisibility(View.VISIBLE);
@@ -296,7 +347,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 //if there is an error
-                Toast.makeText ( getActivity () , "Error"+ databaseError.getMessage () , Toast.LENGTH_SHORT ).show ();
+                Toast.makeText (CartActivity.this , "Error"+ databaseError.getMessage () , Toast.LENGTH_SHORT ).show ();
             }
         } );
     }
@@ -333,14 +384,14 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
 //        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
 //        recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
         recyclerView.setAdapter(adapter);
 
     }
@@ -368,19 +419,19 @@ public class CartFragment extends Fragment {
                 // Printing uploading success message coming from server on android app.
 
                 if (string1.contains("Server Error") || string1.equals("Server Error")){
-                    Toast.makeText(getContext(),"Something Wrong Just Happened : "+string1,Toast.LENGTH_LONG).show();
+                    Toast.makeText(CartActivity.this,"Something Wrong Just Happened : "+string1,Toast.LENGTH_LONG).show();
                 }
                 else if (string1.contains("Pending") || string1.contains("pending")){
                     loadNotification();
-                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, ""+string1, Toast.LENGTH_SHORT).show();
                 }
                 else if (string1.contains("Target Machine Error") || string1.contains("Target Machine Error") || string1.equalsIgnoreCase("Connection Interrupted Target Machine Error") || string1.contains("Error") || string1.contains("error")){
                     loadError();
-                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, ""+string1, Toast.LENGTH_SHORT).show();
                 }
                 else if (string1.equals("") || string1.equalsIgnoreCase(" ")){
                     loadError();
-                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, ""+string1, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     reference.removeValue();
@@ -399,7 +450,7 @@ public class CartFragment extends Fragment {
                     behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     empty.setVisibility(View.GONE);
                     finished.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), ""+string1, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, ""+string1, Toast.LENGTH_SHORT).show();
                 }
 
                 // Setting image as transparent after done uploading.
@@ -447,13 +498,13 @@ public class CartFragment extends Fragment {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        RemoteViews collapse=new RemoteViews(getContext().getPackageName(),R.layout.notification);
-        RemoteViews expand=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+        RemoteViews collapse=new RemoteViews(CartActivity.this.getPackageName(),R.layout.notification);
+        RemoteViews expand=new RemoteViews(CartActivity.this.getPackageName(),R.layout.notification);
 
         assert CHANNEL_ID != null;
         @SuppressLint("RestrictedApi") NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.safe)
-               .setSubText("Order Error")
+                .setSubText("Order Error")
                 .setContentText("Hey, Your Order on Lets Farm App didn't complete. Server Detected. Try again")
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle());
 
@@ -487,8 +538,8 @@ public class CartFragment extends Fragment {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        RemoteViews collapse=new RemoteViews(getContext().getPackageName(),R.layout.notification);
-        RemoteViews expand=new RemoteViews(getContext().getPackageName(),R.layout.notification);
+        RemoteViews collapse=new RemoteViews(CartActivity.this.getPackageName(),R.layout.notification);
+        RemoteViews expand=new RemoteViews(CartActivity.this.getPackageName(),R.layout.notification);
 
         assert CHANNEL_ID != null;
         @SuppressLint("RestrictedApi") NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
@@ -507,10 +558,5 @@ public class CartFragment extends Fragment {
         notificationManager.notify(NOTIFICATION_ID, builder.build());
 
     }
-
-
-
-
-
 
 }

@@ -34,6 +34,7 @@
     <color name="dot_light_screen5">#9FA39F</color>
     <color name="colorgrey">#f2f3f5</color>
 
+    <color name="icon_grey">#B8B7B7</color>
 
     <array name="array_dot_active">
         <item>@color/colorPrimary</item>

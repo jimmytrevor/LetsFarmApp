@@ -9,7 +9,6 @@
     tools:showIn="@layout/activity_yo_profile">
     <ScrollView
         android:scrollbars="none"
-        android:layout_above="@id/say"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -25,22 +24,9 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/pink"
-                android:textStyle="bold"
                 android:layout_height="match_parent"/>
             <include layout="@layout/quick_actions_2"/>
 
         </LinearLayout>
     </ScrollView>
-    <TextView
-        android:background="@color/white"
-        android:padding="20dp"
-        android:fontFamily="monospace"
-        android:textStyle="bold"
-        android:id="@+id/say"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="Powered By Empower Youth In Tech (EYIT) "
-        android:layout_height="wrap_content"/>
 </RelativeLayout>

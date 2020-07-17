@@ -110,8 +110,8 @@ public class DashboardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Notification Not Implemented Yet", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(DashboardActivity.this,NotificationActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -146,6 +146,26 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               startActivity(new Intent(DashboardActivity.this,YoProfileActivity.class));
+            }
+        });
+
+        materialCardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardActivity.this,CartActivity.class));
+            }
+        });
+
+        materialCardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardActivity.this,BasketActivity.class));
+            }
+        });
+        materialCardView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardActivity.this,BasketActivity.class));
             }
         });
 

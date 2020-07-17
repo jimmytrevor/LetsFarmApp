@@ -54,11 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:padding="5dp"
-                android:fontFamily="monospace"
                 android:layout_margin="8dp"
                 android:text="User Profile Setting"
                 android:textAlignment="textStart"
-                android:textStyle="bold"
                 android:gravity="start"
                 android:layout_gravity="start" />
 
@@ -72,8 +70,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/userImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:layout_weight="5"
@@ -96,7 +94,6 @@
                 android:padding="5dp"
                 android:layout_margin="8dp"
                 android:text="Display Name"
-                android:fontFamily="monospace"
                 android:textAlignment="textStart"
                 android:textStyle="bold"
                 android:gravity="start"
@@ -120,7 +117,6 @@
                 android:padding="5dp"
                 android:layout_margin="8dp"
                 android:text="Phone Number"
-                android:fontFamily="monospace"
                 android:textAlignment="textStart"
                 android:textStyle="bold"
                 android:gravity="start" />
@@ -149,7 +145,6 @@
                 android:padding="5dp"
                 android:layout_margin="8dp"
                 android:text="Select Gender"
-                android:fontFamily="monospace"
                 android:textAlignment="textStart"
                 android:textStyle="bold"
                 android:gravity="start"
@@ -187,7 +182,6 @@
                 android:padding="5dp"
                 android:layout_margin="8dp"
                 android:text="Home Address"
-                android:fontFamily="monospace"
                 android:textAlignment="textStart"
                 android:textStyle="bold"
                 android:gravity="start"
@@ -212,9 +206,8 @@
                 android:layout_weight="2"
                 android:padding="5dp"
                 android:layout_margin="8dp"
-                android:fontFamily="monospace"
                 android:text="By tapping Get Started, you agree with terms and policies set to govern the use of this application. For more information read our terms and polices. "
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:gravity="start"
                 android:layout_gravity="start" />
 

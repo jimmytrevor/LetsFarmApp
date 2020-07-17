@@ -57,8 +57,9 @@ public class OrderActivity extends AppCompatActivity {
     EditText search_input;
     String deleteIDHolder,clientHolder;
     private RatingBar ratingBar;
-     ImageButton go_back;
-     TextView delete,rateShow;
+
+     ImageButton go_back,delete;
+     TextView rateShow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class OrderActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                go_back.setEnabled(false);
-               startActivity(new Intent(OrderActivity.this,HomeActivity.class));
+               startActivity(new Intent(OrderActivity.this,BasketActivity.class));
                finish();
            }
        });

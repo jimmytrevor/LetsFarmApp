@@ -2,6 +2,7 @@ package com.example.eyitapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,17 +98,12 @@ public class Home_Adapter  extends RecyclerView.Adapter<Home_Adapter.TipViewHold
             }
         };
 
-        holder.container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(mCtx)
-                        .setTitle(""+product.getName())
-                        .setMessage(""+product.getDescription())
-                        .setCancelable(true);
-                AlertDialog dialog=builder.create();
-                dialog.show();
-            }
-        });
+      holder.removeSpot.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              mCtx.startActivity(new Intent(mCtx,CartActivity.class));
+          }
+      });
 
 
         holder.addCart.setOnClickListener(new View.OnClickListener() {

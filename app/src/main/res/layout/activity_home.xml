@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="true"
+    android:background="@color/colorgrey"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeActivity">
-
-
-
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,32 +32,88 @@
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_arrow_back_black_24dp"/>
 
-
-
-    <FrameLayout
-        android:scrollbars="none"
+    <ScrollView
         android:layout_below="@id/toolbar"
-        android:id="@+id/frame"
-        android:layout_above="@id/nav_view"
+        android:id="@+id/progressScrol"
+        android:visibility="visible"
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="@drawable/item_color"
-        app:itemTextColor="@drawable/item_color"
-        app:itemBackground="@drawable/item_selector"
-        app:menu="@menu/home_menue_item" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+
+        <HorizontalScrollView
+            android:scrollbars="none"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <include layout="@layout/toper_layout"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+
+        <TextView
+        android:layout_width="match_parent"
+        android:text="Add to Cart"
+        android:padding="10dp"
+            android:layout_margin="5dp"
+        android:drawablePadding="20dp"
+        android:id="@+id/text"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/search_input"
+        android:inputType="text"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:hint="Search For Item"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/search_drawable"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:background="@drawable/search_design"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tipsRecycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/progressLay"
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+            <TextView
+                android:textAlignment="center"
+                android:text="Loading Products...."
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

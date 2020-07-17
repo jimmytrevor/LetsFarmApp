@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_gravity="center"
@@ -64,7 +64,6 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="textStart"
                             android:padding="3dp"
-                            android:textStyle="bold"
                             android:textColor="@color/colorPrimary"
                             android:text="Frits"
                             android:gravity="start" />
@@ -79,7 +78,6 @@
                             android:layout_weight="3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
                             android:padding="4dp"
                             android:text="UGX:"
                             android:fontFamily="serif-monospace"
@@ -93,8 +91,6 @@
                             android:padding="4dp"
                             android:text="899898"
                             android:fontFamily="serif-monospace"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
                             android:textColor="@android:color/holo_orange_dark"
                             android:gravity="start" />
                     </LinearLayout>
@@ -113,9 +109,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Added To Cart"
+                        android:text="Check In Cart"
                         android:textStyle="bold"
-                        android:textSize="18sp"
                         android:padding="5dp"
                         android:gravity="center_vertical"
                         android:textAllCaps="false"
@@ -127,10 +122,11 @@
                         android:id="@+id/addCart"
                         android:layout_weight="2"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="33dp"
                         android:layout_gravity="center"
                         android:text="Add TO CART"
                         android:gravity="center_vertical"
+                        android:textStyle="normal"
                         android:paddingStart="20dp"
                         android:drawablePadding="30dp"
                         android:drawableLeft="@drawable/ic_add_shopping_cart_black_24dp"

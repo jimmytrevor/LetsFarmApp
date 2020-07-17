@@ -3,14 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single" >
-        <item android:title="Settings"
-            android:id="@+id/help"
-            app:showAsAction="never"
-            android:iconTint="@color/white"
-            />
-        <item android:title="Lock App"
+
+        <item android:title="Help"
             android:id="@+id/share"
-            android:icon="@drawable/ic_lock_outline_black_24dp"
+            android:icon="@drawable/ic_help_outline_black_24dp"
             android:iconTint="@color/white"
             app:showAsAction="always"
             />
@@ -20,11 +16,5 @@
             android:iconTint="@color/white"
             android:icon="@drawable/ic_my_location_black_24dp"
             />
-        <item android:title="Privacy"
-            android:iconTint="@color/white"
-            android:id="@+id/privacy"
-            app:showAsAction="never"
-            />
     </group>
-
 </menu>

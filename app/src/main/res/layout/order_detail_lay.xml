@@ -40,12 +40,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:drawablePadding="20dp"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:padding="7dp"
                     android:layout_weight="1"
                     android:drawableTint="@android:color/holo_green_light"
                     android:drawableLeft="@drawable/ic_star_border_black_24dp"
-                    android:text="See This Order Rating Scale"/>
+                    android:text="Order Rating Scale"/>
 
 
                 <TextView
@@ -86,35 +86,25 @@
         android:text="Order Items"
         android:padding="10dp"
         android:drawablePadding="20dp"
-        android:fontFamily="serif-monospace"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:layout_weight="1"
         android:id="@+id/text"
         android:layout_height="wrap_content"/>
-    <TextView
+
+
+    <ImageButton
+        android:padding="10dp"
         android:visibility="gone"
         android:id="@+id/deleteOrder"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
+        android:backgroundTint="@color/pink"
+        android:tint="@color/colorgrey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="CANCEL"
-        android:gravity="center_vertical"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:drawablePadding="30dp"
-        android:drawableLeft="@drawable/ic_close_black_24dp"
-        android:textAllCaps="true"
-        android:drawableTint="@android:color/black"
-        android:textColor="@color/white"
-        android:background="@drawable/borderless2"
-        android:backgroundTint="@color/pink"
-        android:paddingLeft="20dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/borderless"
+        android:src="@drawable/ic_close_black_24dp"/>
+
 </LinearLayout>
 
     <LinearLayout
@@ -125,6 +115,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:visibility="gone"
             android:id="@+id/search_input"
             android:layout_below="@+id/text"
             android:inputType="text"

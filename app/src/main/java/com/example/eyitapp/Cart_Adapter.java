@@ -66,8 +66,8 @@ final int intial_price=mDataFiltered.get(position).getPrice();
                 .load(mDataFiltered.get(position).getImage())
                 .into(holder.PImage);
 
-        holder.PImage.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in_transition));
-        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_in_transition));
+        holder.PImage.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_transition));
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_transition));
         holder.PName.setText(""+mDataFiltered.get(position).getQuantity()+" "+mDataFiltered.get(position).getName());
         holder.Price.setText(""+mDataFiltered.get(position).getPrice());
 
@@ -113,12 +113,14 @@ final int intial_price=mDataFiltered.get(position).getPrice();
                         String userPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
                         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Cart").child(userPhone).child("yoCart");
                         reference.child(keys.get(position)).removeValue();
-                        Toast.makeText(mContext, ""+mDataFiltered.get(position).getName()+" removed from Cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, ""+mDataFiltered.get(position).getName()+" removed from Cart. Cart Refreshed", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 //                        mDataFiltered.clear();
 //                        mData.clear();
-                        mContext.startActivity(new Intent(mContext.getApplicationContext(),HomeActivity.class).putExtra("Tag","Cart"));
-
+//                        mContext.startActivity(new Intent(mContext.getApplicationContext(),CartActivity.class));
+                        Intent intent=new Intent(mContext,CartActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        mContext.startActivity(intent);
                     }
                 });
             }

@@ -139,7 +139,7 @@ public class History_Adapter  extends RecyclerView.Adapter<History_Adapter.TipVi
     };
     class TipViewHolder extends RecyclerView.ViewHolder {
         private TextView dateMade,totalProduct,totalPrice,orderStatus,orderID,subPrice,dollars;
-        private ImageButton expandCart;
+        private TextView expandCart;
         private MaterialCardView container;
         public TipViewHolder(View itemView) {
             super(itemView);

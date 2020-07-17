@@ -1,5 +1,10 @@
 package com.example.eyitapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -7,26 +12,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,12 +42,7 @@ import java.util.List;
 
 import static com.example.eyitapp.HttpLinks.returnOrder;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HistoryFragment extends Fragment {
-
+public class BasketActivity extends AppCompatActivity {
     String finalResult ;
     HashMap<String,String> hashMap = new HashMap<>();
     String ParseResult ;
@@ -57,41 +56,99 @@ public class HistoryFragment extends Fragment {
     ProgressDialog progressDialog2;
     String userPhoneHolder;
     TextView test;
-    List<History_Objects> List;
+    java.util.List<History_Objects> List;
 
 
     RecyclerView recyclerView;
     LinearLayout progress,noOrder,dataLay;
-    private  Context context;
+    private Context context;
 
     History_Adapter adapter;
     EditText search_input;
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
+    Toolbar tool;
+    ImageButton go_back;
 
 
+    MaterialCardView materialCardView1,materialCardView2,materialCardView3,materialCardView4;
+    String FindPhone;
+    TextView countCartItems;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
-        recyclerView =view.findViewById(R.id.tipsRecycle);
-        progress=view.findViewById(R.id.progressLay);
-        dataLay=view.findViewById(R.id.dataLay);
-        test=view.findViewById(R.id.text);
-        search_input=view.findViewById(R.id.search_input);
-        noOrder=view.findViewById(R.id.emptyLay);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_basket);
+
+        recyclerView =findViewById(R.id.tipsRecycle);
+        progress=findViewById(R.id.progressLay);
+        dataLay=findViewById(R.id.dataLay);
+        test=findViewById(R.id.text);
+        search_input=findViewById(R.id.search_input);
+        noOrder=findViewById(R.id.emptyLay);
         recyclerView.setHasFixedSize(true);
         noOrder.setVisibility(View.GONE);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        tool=findViewById(R.id.toolbar);
+        go_back=findViewById(R.id.go_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go_back.setEnabled(false);
+                startActivity(new Intent(BasketActivity.this,HomeActivity.class));
+                finish();
+            }
+        });
+        tool.setTitle("Your Basket");
+        setSupportActionBar(tool);
+        fadeIn(tool);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(BasketActivity.this));
 
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 //        recyclerView.setLayoutManager(layoutManager);
 
         List = new ArrayList<>();
+        TextView shopNow=findViewById(R.id.shopNow);
+        shopNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BasketActivity.this,HomeActivity.class));
+            }
+        });
+
+        countCartItems=findViewById(R.id.countCart);
+        materialCardView1=findViewById(R.id.smartContainer1);
+        materialCardView2=findViewById(R.id.smartContainer2);
+        materialCardView3=findViewById(R.id.smartContainer3);
+        materialCardView4=findViewById(R.id.smartContainer4);
+        materialCardView2.setVisibility(View.GONE);
+        materialCardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BasketActivity.this,CartActivity.class));
+            }
+        });
+        materialCardView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BasketActivity.this,HomeActivity.class));
+            }
+        });
+        materialCardView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BasketActivity.this,DashboardActivity.class));
+            }
+        });
+        FindPhone= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+
+
+
+countCart();
+
+
+
 
 //        proceed.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -100,9 +157,9 @@ public class HistoryFragment extends Fragment {
 //                Toast.makeText(getContext(), "Feed Your Cart Now", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        noOrder.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_in_transition));
+        noOrder.setAnimation(AnimationUtils.loadAnimation(BasketActivity.this,R.anim.fade_in_transition));
 //        test.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_scale_transition));
-       adapter = new History_Adapter(getContext(), List);
+        adapter = new History_Adapter(BasketActivity.this, List);
         userPhoneHolder= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         HttpWebCall(userPhoneHolder);
 
@@ -125,10 +182,38 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-        return view;
     }
+    private void fadeIn(View view){
+        AlphaAnimation animation=new AlphaAnimation(0.0f,1.0f);
+        animation.setDuration(1500);
+        view.startAnimation(animation);
+        view.setVisibility(View.VISIBLE);
 
+    }
     //Method to show current record Current Selected Record
+    private  void countCart(){
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Cart").child(FindPhone).child("yoCart");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int count = (int) dataSnapshot.getChildrenCount();
+
+                if (count > 0){
+                    countCartItems.setText(String.valueOf(count));
+
+                }
+                else{
+                    countCartItems.setText("Empty");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(BasketActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     public void HttpWebCall(String phone){
 
         class HttpWebCallFunction extends AsyncTask<String,Void,String> {
@@ -151,7 +236,7 @@ public class HistoryFragment extends Fragment {
                 FinalJSonObject = httpResponseMsg ;
 
                 //Parsing the Stored JSOn String to GetHttpResponse Method.
-                new HistoryFragment.GetHttpResponse(getActivity()).execute();
+                new BasketActivity.GetHttpResponse(BasketActivity.this).execute();
 
             }
 

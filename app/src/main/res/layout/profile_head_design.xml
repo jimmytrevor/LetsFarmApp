@@ -14,7 +14,6 @@
         android:gravity="center"
         android:id="@+id/userName"
         android:textStyle="bold"
-        android:textSize="18sp"
         android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="match_parent"
@@ -23,7 +22,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:id="@+id/userPhone"
-        android:textStyle="bold"
         android:layout_margin="2dp"
         android:layout_height="wrap_content"/>
 
@@ -37,12 +35,12 @@
         android:layout_margin="2dp"
         android:layout_height="wrap_content"/>
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="130dp"
+        android:layout_width="100dp"
         android:scaleType="centerCrop"
         android:id="@+id/userImage"
         android:src="@drawable/image_hint"
         android:layout_gravity="center"
-        android:layout_height="130dp"/>
+        android:layout_height="100dp"/>
 
     <TextView
         android:layout_width="match_parent"

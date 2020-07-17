@@ -18,6 +18,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+        <activity android:name=".NotificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.R"
+            android:label="Notifications"
+            ></activity>
+        <activity
+            android:name=".BasketActivity"
+            android:label="Your Orders"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.R" />
+        <activity
+            android:name=".CartActivity"
+            android:label="Yo Cart Items"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.R" />
         <activity
             android:name=".YoProfileActivity"
             android:label="Yo-Profile"
@@ -31,7 +48,7 @@
             android:name=".DashboardActivity"
             android:label="Yo Dashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OrderActivity"
             android:screenOrientation="portrait"
@@ -40,6 +57,7 @@
         <activity
             android:name=".HomeActivity"
             android:label="Yo-Shop"
+            android:parentActivityName=".DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar.R" />
         <activity android:name=".ProfileActivity" />
         <activity

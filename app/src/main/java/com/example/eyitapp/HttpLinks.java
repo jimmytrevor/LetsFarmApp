@@ -10,6 +10,8 @@ public class HttpLinks {
     public static final String customOrder = "http://" + server + "/customOrder.php";
     public static final String cancelOrder = "http://" + server + "/cancelOrder.php";
     public static final String countProfile = "http://" + server + "/countProfile.php";
+    public static final String loadNotification = "http://" + server + "/notification.php";
+//    public static final String changeNotification = "http://" + server + "/noteChange.php";
 
 }
 

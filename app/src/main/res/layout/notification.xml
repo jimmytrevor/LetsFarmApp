@@ -9,7 +9,6 @@
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:text="Pending Order"
-        android:fontFamily="monospace"
         android:layout_gravity="center"
         android:layout_height="wrap_content"/>
     <TextView
@@ -29,37 +28,14 @@
             android:layout_weight="1"
             android:textAllCaps="false"
             android:layout_marginStart="10dp"
-            android:fontFamily="monospace"
-            android:gravity="start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Learn More"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="10dp" />
-
-        <TextView
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:layout_marginStart="10dp"
-            android:fontFamily="monospace"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Close"
-            android:textColor="@color/red_primary"
-            android:layout_marginLeft="10dp" />
-
-        <TextView
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:layout_marginStart="10dp"
-            android:fontFamily="monospace"
             android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Review"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="10dp" />
+            android:text="Click to Open"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/pink"
+            android:layout_marginLeft="20dp" />
 
     </LinearLayout>
 </LinearLayout>

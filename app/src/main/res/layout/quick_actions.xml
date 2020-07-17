@@ -37,7 +37,7 @@
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="60dp"
-                        android:tint="@color/colorgrey"
+                        android:tint="@color/icon_grey"
                         android:src="@drawable/ic_shopping_basket_black_24dp"
                         android:layout_height="60dp"/>
 
@@ -72,7 +72,7 @@
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="60dp"
-                        android:tint="@color/colorgrey"
+                        android:tint="@color/icon_grey"
                         android:src="@drawable/ic_format_color_fill_black_24dp"
                         android:layout_height="60dp"/>
                     <TextView
@@ -112,7 +112,7 @@
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="60dp"
-                        android:tint="@color/colorgrey"
+                        android:tint="@color/icon_grey"
                         android:src="@drawable/ic_star_border_black_24dp"
                         android:layout_height="60dp"/>
 
@@ -147,7 +147,7 @@
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="60dp"
-                        android:tint="@color/colorgrey"
+                        android:tint="@color/icon_grey"
                         android:src="@drawable/ic_settings_black_24dp"
                         android:layout_height="60dp"/>
 
